@@ -1,0 +1,58 @@
+managed implementation in class ZBP_R_4058_FLIGHT unique;
+strict ( 2 );
+with draft;
+extensible;
+define behavior for ZR_4058_FLIGHT alias Zr4058Flight
+persistent table Z4058_FLIGHT
+extensible
+draft table Z4058_FLIGHT_D
+etag master LocalLastChangedAt
+lock master total etag LastChangedAt
+authorization master( global )
+{
+  field ( mandatory : create )
+   CarrierID,
+   ConnectionID,
+   FlightDate;
+
+  field ( readonly )
+   LocalCreatedBy,
+   LocalCreatedAt,
+   LocalLastChangedBy,
+   LocalLastChangedAt,
+   LastChangedAt;
+
+  field ( readonly : update )
+   CarrierID,
+   ConnectionID,
+   FlightDate;
+
+
+  create;
+  update;
+  delete;
+
+  validation validatePrice on save { create; field Price; }
+
+  draft action Activate optimized;
+  draft action Discard;
+  draft action Edit;
+  draft action Resume;
+  draft determine action Prepare;
+
+  mapping for Z4058_FLIGHT corresponding extensible
+  {
+    CarrierID = carrier_id;
+    ConnectionID = connection_id;
+    FlightDate = flight_date;
+    Price = price;
+    CurrencyCode = currency_code;
+    PlaneTypeID = plane_type_id;
+    LocalCreatedBy = local_created_by;
+    LocalCreatedAt = local_created_at;
+    LocalLastChangedBy = local_last_changed_by;
+    LocalLastChangedAt = local_last_changed_at;
+    LastChangedAt = last_changed_at;
+  }
+
+}

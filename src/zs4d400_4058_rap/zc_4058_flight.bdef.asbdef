@@ -1,0 +1,24 @@
+projection implementation in class ZBP_C_4058_FLIGHT unique;
+strict ( 2 );
+extensible;
+use draft;
+use side effects;
+define behavior for ZC_4058_FLIGHT alias Zc4058Flight
+extensible
+use etag
+{
+
+field (readonly)
+   PlaneTypeID;
+
+//  use create;
+  use update;
+//  use delete;
+
+  use action Edit;
+  use action Activate;
+  use action Discard;
+  use action Resume;
+  use action Prepare;
+
+}
